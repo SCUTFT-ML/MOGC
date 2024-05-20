@@ -1,0 +1,11 @@
+load('adj_football.mat');
+load('gnd_football.mat');
+A = MotifAdjacency(double(A), 'm4');
+A=full(A);
+[LCC,lcc_inds]=LargestConnectedComponent(A);
+[cluster,condv,condc]=SpectralPartitioning(LCC);
+nmitotal=NMI(gnd(:,2)+1,cluster);
+[~,F1,RI,~,~]=RandIndex(gnd(:,2)+1,cluster);
+RItotal=RI;
+Ptotal=Purity(gnd(:,2)+1,cluster);
+f1total=F1;
